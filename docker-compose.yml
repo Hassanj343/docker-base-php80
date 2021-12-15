@@ -1,0 +1,17 @@
+version: "3"
+services:
+  base-app:
+    build:
+      context: .
+      dockerfile: dockerfile
+      args:
+        S3_REGION: $S3_REGION
+        S3_ACCESS_KEY: $S3_ACCESS_KEY
+        S3_SECRET: $S3_SECRET
+    image: $REPOSITORY_URI:latest
+    container_name: base-php80-fpm
+    restart: unless-stopped
+    tty: false
+    ports:
+      - "80:80"
+    working_dir: /var/www
